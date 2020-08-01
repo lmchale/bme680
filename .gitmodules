@@ -1,0 +1,4 @@
+[submodule "BME680_driver.git"]
+	path = BME680_driver.git
+	url = git@github.com:lmchale/BME680_driver.git
+	branch = master
