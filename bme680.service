@@ -1,0 +1,11 @@
+[Unit]
+Description='Bosch BME680 Data Logging Service'
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c 'bme680-logger /home/pi/data.txt'
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

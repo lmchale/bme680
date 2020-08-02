@@ -70,11 +70,14 @@ int main (int argc, char* argv[]) {
 	}
 
 	// Register SIGINT handler for clean shutdown:
-	struct sigaction sigIntHandler;
-	sigIntHandler.sa_handler = sig_handler;
-	sigemptyset(&sigIntHandler.sa_mask);
-	sigIntHandler.sa_flags = 0;
-	sigaction(SIGINT, &sigIntHandler, NULL);
+	struct sigaction sigHandler;
+	sigHandler.sa_handler = sig_handler;
+	sigemptyset(&sigHandler.sa_mask);
+	sigHandler.sa_flags = 0;
+	sigaction(SIGINT, &sigHandler, NULL);
+	sigaction(SIGTERM, &sigHandler, NULL);
+	sigaction(SIGQUIT, &sigHandler, NULL);
+	sigaction(SIGHUP, &sigHandler, NULL);
 
 	// Sensor measurement loop:
 	measurements.reserve(60);

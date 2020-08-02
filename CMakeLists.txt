@@ -7,5 +7,7 @@ add_executable(bme680-logger main.cpp)
 target_link_libraries(bme680-logger spi-bme680 stdc++fs)
 target_include_directories(bme680-logger PRIVATE "BME680_driver.git")
 
+install(TARGETS bme680-logger DESTINATION bin)
+
 add_subdirectory(BME680_driver.git)
 
