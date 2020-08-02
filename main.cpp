@@ -34,7 +34,10 @@ void flush_data();
 void sig_handler(int s) {
 	std::cerr << "Caught signal " << s << std::endl;
 	flush_data();
-	std::exit(EXIT_SUCCESS);
+	if (s == SIGUSR1 || s == SIGUSR2) {
+		return;	// flush, but keep service alive on user signals.
+	}
+	std::exit(EXIT_SUCCESS);	// indicate successful flush
 }
 
 
@@ -78,6 +81,8 @@ int main (int argc, char* argv[]) {
 	sigaction(SIGTERM, &sigHandler, NULL);
 	sigaction(SIGQUIT, &sigHandler, NULL);
 	sigaction(SIGHUP, &sigHandler, NULL);
+	sigaction(SIGUSR1, &sigHandler, NULL);
+	sigaction(SIGUSR2, &sigHandler, NULL);
 
 	// Sensor measurement loop:
 	measurements.reserve(60);
